@@ -88,12 +88,21 @@ var upperCasedCharacters = [
   "Z",
 ];
 
+let allDigit = [...specialCharacters, ...numericCharacters, ...lowerCasedCharacters, ...upperCasedCharacters]
+
+
 // Function to prompt user for password options
+
+// (The main purpose of this is to gather user input to determine what will be included in the generated password)
+
 function getPasswordOptions() {
   // - How many characters would you like in the password?
-  let length = windows.prompt(
+  let length = prompt(
     "how many characters would you like? [please choose between 10 and 64]"
+    
   );
+
+  
   // checking if input is invalid
   if (length < 10 || length > 64) {
     alert("please input a number between 10 and 64");
@@ -107,48 +116,48 @@ function getPasswordOptions() {
 
   // checking if the password should have lowerCase/upperCase/numberCharacter/specialCharacter
 
-  let lowerCasedCharacters = windows.confirm("would you like to include lowercase? [`ok` for Yes or `cancel` for No]"
+  let lowerCasedCharacters = confirm("would you like to include lowercase? [`ok` for Yes or `cancel` for No]"
   );
 
-  let upperCasedCharacters = windows.confirm(
+  let upperCasedCharacters = confirm(
     "would you like to include uppercase? [`ok` for Yes or `cancel` for No]"
   );
 
-  let numberCharacters = window.confirm(
+  let numberCharacters = confirm(
   "would you like to include number character? [`ok` for Yes or `cancel` for No]")
 
-  let specialCharacters = windows.confirm ("would you like to include spacial character? [`ok` for Yes or `cancel` for No]");
+  let specialCharacters = confirm ("would you like to include spacial character? [`ok` for Yes or `cancel` for No]");
 
-let passwordOption = 
+let options = {
+  optionLength: length,
+  optionLowerCase: lowerCasedCharacters,
+  optionUppercase: upperCasedCharacters,
+  optionNumber: numberCharacters,
+  optionSpecialCharacter: specialCharacters
+  
+}; 
 
+length = parseInt(length);
+options.length = length;
+return options;
 
-  /* 
+};
 
-    The main purpose of this method is to gather user input to determine
-    what will be included in the generated password.
+getPasswordOptions()
 
-    
-
-    Other Requirements:
-    - code should validate for each input: 
-        - Many times users will try to input incorrect input to try and break the app. What if a user inserts 
-          a letter instead of a number when we ask for password length? How can we check to see that the correct 
-          data type (a number) was inserted? 
-      - What can we use to display a message to the user in the browser if they input incorrect content ? 
-  */
-
-  //  where should this function be called within the file?
-}
+//  where should this function be called within the file?
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  // accepts an array as input
-  // how can we generate random numbers and use them to grab content from the arrays ?
-  //  where should this function be called within the file?
+let random = (maths.random()* arr.length)
+    
+  
+  
 }
 
 // Function to generate password with user input
 function generatePassword() {}
+let userChoice = getPasswordOptions ();
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
