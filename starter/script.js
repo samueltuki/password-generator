@@ -88,7 +88,7 @@ var upperCasedCharacters = [
   "Z",
 ];
 
-let allDigit = [...specialCharacters, ...numericCharacters, ...lowerCasedCharacters, ...upperCasedCharacters]
+
 
 
 // Function to prompt user for password options
@@ -129,8 +129,8 @@ function getPasswordOptions() {
 
   let specialCharacters = confirm ("would you like to include special character? [`ok` for Yes or `cancel` for No]");
 
-  if (lowerCasedCharacters === false && upperCasedCharacters === false && numberCharacters === false && specialCharacters ) {
-    alert ("please choose at least one option")
+  if (lowerCasedCharacters === false && upperCasedCharacters === false && numberCharacters === false && specialCharacters === false) {
+    alert ("please choose at least one option");
 
     return;
   }
@@ -147,8 +147,6 @@ let options = {
 }; 
 
 
-return options;
-
 };
 
 getPasswordOptions()
@@ -157,11 +155,16 @@ getPasswordOptions()
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-let random = (maths.random()* arr.length)
+let random = Math.floor(Math.random()* arr.length)
+
+console.log(getRandom(optionLowercase.lowerCasedCharacters));
     
-  
+return arr[random];
+
   
 }
+
+
 
 // Function to generate password with user input
 function generatePassword() {}
