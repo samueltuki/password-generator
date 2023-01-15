@@ -97,21 +97,22 @@ let allDigit = [...specialCharacters, ...numericCharacters, ...lowerCasedCharact
 
 function getPasswordOptions() {
   // - How many characters would you like in the password?
-  let length = prompt(
-    "how many characters would you like? [please choose between 10 and 64]"
+  let length = parseInt (prompt(
+    "how many characters would you like? [please choose between 10 and 64]")
+
     
   );
 
-  
   // checking if input is invalid
   if (length < 10 || length > 64) {
     alert("please input a number between 10 and 64");
-    return false;
+   return;
   }
 
-  if ((length = isNaN)) {
+  if (isNaN(length)) {
     alert("please input a number that is valid");
-    return false;
+    
+    return;
   }
 
   // checking if the password should have lowerCase/upperCase/numberCharacter/specialCharacter
@@ -126,7 +127,14 @@ function getPasswordOptions() {
   let numberCharacters = confirm(
   "would you like to include number character? [`ok` for Yes or `cancel` for No]")
 
-  let specialCharacters = confirm ("would you like to include spacial character? [`ok` for Yes or `cancel` for No]");
+  let specialCharacters = confirm ("would you like to include special character? [`ok` for Yes or `cancel` for No]");
+
+  if (lowerCasedCharacters === false && upperCasedCharacters === false && numberCharacters === false && specialCharacters ) {
+    alert ("please choose at least one option")
+
+    return;
+  }
+
 
 let options = {
   optionLength: length,
@@ -135,10 +143,10 @@ let options = {
   optionNumber: numberCharacters,
   optionSpecialCharacter: specialCharacters
   
+  
 }; 
 
-length = parseInt(length);
-options.length = length;
+
 return options;
 
 };
