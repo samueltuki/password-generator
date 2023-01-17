@@ -1,7 +1,7 @@
  # Password Generator
 
  ## Description
- This Javascript code if for a password generator application using input by the user to determine the following;
+ This Javascript code is for a password generator application using input by the user to determine the following;
 
 * Generate a password when the button is clicked
   * Present a series of prompts for password criteria
