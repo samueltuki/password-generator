@@ -20,7 +20,7 @@ The application generates random passwords.
 https://samueltuki.github.io/password-generator/
 
 ## Application Output
-![Alt text](../../Downloads/Web%20capture_17-1-2023_23014_.jpeg)
+[Alt text](../../Downloads/Web%20capture_17-1-2023_23014_.jpeg)
 
 
 ## Installation
