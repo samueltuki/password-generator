@@ -1,143 +1,207 @@
 // Array of special characters to be included in password
 var specialCharacters = [
-  '@',
-  '%',
-  '+',
-  '\\',
-  '/',
+  "@",
+  "%",
+  "+",
+  "\\",
+  "/",
   "'",
-  '!',
-  '#',
-  '$',
-  '^',
-  '?',
-  ':',
-  ',',
-  ')',
-  '(',
-  '}',
-  '{',
-  ']',
-  '[',
-  '~',
-  '-',
-  '_',
-  '.'
+  "!",
+  "#",
+  "$",
+  "^",
+  "?",
+  ":",
+  ",",
+  ")",
+  "(",
+  "}",
+  "{",
+  "]",
+  "[",
+  "~",
+  "-",
+  "_",
+  ".",
 ];
 
 // Array of numeric characters to be included in password
-var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+var numericCharacters = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 // Array of lowercase characters to be included in password
 var lowerCasedCharacters = [
-  'a',
-  'b',
-  'c',
-  'd',
-  'e',
-  'f',
-  'g',
-  'h',
-  'i',
-  'j',
-  'k',
-  'l',
-  'm',
-  'n',
-  'o',
-  'p',
-  'q',
-  'r',
-  's',
-  't',
-  'u',
-  'v',
-  'w',
-  'x',
-  'y',
-  'z'
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
 ];
 
 // Array of uppercase characters to be included in password
 var upperCasedCharacters = [
-  'A',
-  'B',
-  'C',
-  'D',
-  'E',
-  'F',
-  'G',
-  'H',
-  'I',
-  'J',
-  'K',
-  'L',
-  'M',
-  'N',
-  'O',
-  'P',
-  'Q',
-  'R',
-  'S',
-  'T',
-  'U',
-  'V',
-  'W',
-  'X',
-  'Y',
-  'Z'
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
 ];
 
 // Function to prompt user for password options
+// (The main purpose of this is to gather user input to determine what will be included in the generated password)
 function getPasswordOptions() {
+  // - How many characters would you like in the password?
 
-  
+  let response = prompt(
+    "how many characters would you like? [please choose between 10 and 64]"
+  );
+  if (response === null) {
+    return;
+  }
 
-  /* 
+  let length = parseInt(response);
 
-    The main purpose of this method is to gather user input to determine
-    what will be included in the generated password.
+  // checking if input is invalid
+  if (length < 10 || length > 64) {
+    alert("please input a number between 10 and 64");
+    return;
+  }
 
-    Questions to ask users:
-    - How many characters would you like in the password? (Prompt or Confirm?)
-    - Are Uppercase letters allowed? (Prompt or Confirm?)
-    - Are Lowercase letters allowed? (Prompt or Confirm?)
-    - Are Numeric characters allowed? (Prompt or Confirm?)
-    - Are special characters allowed? (Prompt or Confirm?)
+  if (isNaN(length)) {
+    alert("please input a number that is valid");
+    return;
+  }
 
-    Other Requirements:
-    - code should validate for each input: 
-        - Many times users will try to input incorrect input to try and break the app. What if a user inserts 
-          a letter instead of a number when we ask for password length? How can we check to see that the correct 
-          data type (a number) was inserted? 
-      - What can we use to display a message to the user in the browser if they input incorrect content ? 
-  */
+  // Defined options object here to record length and prompts
+  let options = { length: length };
 
-  //  where should this function be called within the file?
+  // checking if the password should have lowerCase/upperCase/numberCharacter/specialCharacter
+  options.lowerCase = confirm(
+    "would you like to include lowercase? [`ok` for Yes or `cancel` for No]"
+  );
+
+  options.upperCase = confirm(
+    "would you like to include uppercase? [`ok` for Yes or `cancel` for No]"
+  );
+
+  options.number = confirm(
+    "would you like to include number character? [`ok` for Yes or `cancel` for No]"
+  );
+
+  options.special = confirm(
+    "would you like to include special character? [`ok` for Yes or `cancel` for No]"
+  );
+
+  if (
+    !options.lowerCase &&
+    !options.upperCase &&
+    !options.number &&
+    !options.special
+  ) {
+    alert("please choose at least one option");
+    return;
+  }
+
+  // I am returning options object so the generatePassword function can use it
+  return options;
 }
 
 // Function for getting a random element from an array
-function getRandom(arr) { // accepts an array as input
-  // how can we generate random numbers and use them to grab content from the arrays ?
-  //  where should this function be called within the file?
+function getRandom(arr) {
+  let random = Math.floor(Math.random() * arr.length);
+  return arr[random];
 }
 
 // Function to generate password with user input
 function generatePassword() {
+  // !!EDIT!!
+  // Get the options from the getPasswordOptions function
+  let options = getPasswordOptions();
+  let password = "";
 
+  // logging it so i can see what's happening :)
+  console.log(options);
+
+  // !!EDIT!!
+  // We can skip this bit if nothing was returned from getPasswordOptions because it means something has gone wrong
+  // i.e. user cancelled, entered an invalid length, or didn't select any character options.
+  if (options) {
+    while (password.length < options.length) {
+      if (password.length < options.length && options.upperCase) {
+        password += getRandom(upperCasedCharacters);
+      }
+      if (password.length < options.length && options.lowerCase) {
+        password += getRandom(lowerCasedCharacters);
+      }
+      if (password.length < options.length && options.number) {
+        password += getRandom(numericCharacters);
+      }
+      if (password.length < options.length && options.special) {
+        password += getRandom(specialCharacters);
+      }
+    }
+  }
+  // Returning the password to the write password function
+  return password;
 }
 
 // Get references to the #generate element
-var generateBtn = document.querySelector('#generate');
+let generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  // nothing needs to be changed inside of here
-  var password = generatePassword();
-  var passwordText = document.querySelector('#password');
+  let password = generatePassword();
 
-  passwordText.value = password;
+  // If the user tried a second time but picked an invalid length or cancelled or something
+  if (password) {
+    let passwordText = document.querySelector("#password");
+    passwordText.value = password;
+
+    // just logging the length of the password so i can see it's the correct length
+    console.log(password.length);
+  }
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener('click', writePassword); // possible to switch out the function passed in - to test the functionality of the functions declared above
+generateBtn.addEventListener("click", writePassword); // possible to switch out the function passed in - to test the functionality of the functions declared above
