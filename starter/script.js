@@ -163,9 +163,6 @@ function generatePassword() {
   // logging it so i can see what's happening :)
   console.log(options);
 
-  // !!EDIT!!
-  // We can skip this bit if nothing was returned from getPasswordOptions because it means something has gone wrong
-  // i.e. user cancelled, entered an invalid length, or didn't select any character options.
   if (options) {
     while (password.length < options.length) {
       if (password.length < options.length && options.upperCase) {
